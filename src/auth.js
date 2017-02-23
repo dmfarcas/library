@@ -1,6 +1,6 @@
-// import firebaseUi from '../vendors/firebase-ui-auth.js';
 import firebase from 'firebase';
-// import firebaseUiAuthCss from '../vendors/firebase-ui-auth.css'; /* eslint no-unused-vars: 0 */
+import firebaseUiAuthCss from './vendors/firebase-ui-auth.css'; /* eslint no-unused-vars: 0 */
+import firebaseui from 'firebaseui';
 
 const user = {
   displayName: '',
@@ -12,7 +12,6 @@ const user = {
 
 const initAuthUI = function initAuthUI() {
   // firebaseui is imported by script tag
-  const firebaseui = window.firebaseui;
   // FirebaseUI config.
   const uiConfig = {
     signInSuccessUrl: '',
