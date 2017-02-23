@@ -1,15 +1,70 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Hello from 'components/Hello';
+import Login from 'components/Login';
+import Admin from 'components/Admin';
+import Dashboard from 'components/Dashboard';
+import NotFound from 'components/NotFound';
+import firebase from 'firebase';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
+  mode: 'history',
   routes: [
     {
-      path: '/',
-      name: 'Hello',
-      component: Hello,
+      path: '/'
     },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login,
+    },
+    {
+      path: '/admin',
+      name: 'Admin',
+      meta: {
+        requiresAuth: true,
+      },
+      component: Admin,
+    },
+     {
+      path: '/dashboard',
+      name: 'Dashboard',
+      meta: {
+        requiresAuth: true,
+      },
+      component: Dashboard,
+    },
+    {
+      path: '*',
+      name: 'NotFound',
+      component: NotFound,
+    }
   ],
 });
+
+
+router.beforeEach((to, from, next) => {
+  firebase.auth().onAuthStateChanged((user) => {
+    if (to.path === "/") {
+      if (user) {
+        next('/dashboard');
+      } else {
+        next('/login');
+      }
+    }
+  });
+
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!firebase.auth().currentUser) {
+      next('/');
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+
+
+export default router;

@@ -1,0 +1,33 @@
+<template>
+  <div id="app">
+    <article class="main" v-bind:class="{'start': !user.uid}">
+
+      <div class="login" v-show="!user.uid">
+        <h1>Login</h1>
+        <div id="firebaseui-auth-container"></div>
+      </div>
+    </article>
+
+  </div>
+</template>
+
+<script>
+  import firebase from 'firebase';
+  import { init, getUser } from '../auth';
+
+  const user = getUser();
+  const initApp = function initApp() {
+    init();
+  }
+
+  
+  export default {
+    data() {
+      return { user };
+    },
+    methods: { },
+    created: initApp,
+    events: {
+    }
+  };
+</script>

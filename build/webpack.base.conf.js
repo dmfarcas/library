@@ -7,6 +7,14 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
+
+try {
+  require('os').networkInterfaces();
+}
+catch (e) {
+  require('os').networkInterfaces = () => ({});
+}
+
 module.exports = {
   entry: {
     app: './src/main.js'

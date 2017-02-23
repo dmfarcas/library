@@ -32,7 +32,6 @@ const initAuthUI = function initAuthUI() {
 
 const init = function init() {
   firebase.auth().onAuthStateChanged((theUser) => {
-    console.log(theUser);
     if (theUser) {
       user.displayName = theUser.displayName;
       user.email = theUser.email;
@@ -72,4 +71,4 @@ const logout = function logout() {
   });
 };
 
-export default { init, getUser, logout };
+export { init, getUser, logout };
