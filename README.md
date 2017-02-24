@@ -5,7 +5,15 @@
 
 ## TODO
 ...a todo list on trello?
-
+* Be able to add a book in the library. Be able to remove a book.
+  * Book component
+  * Read book list database
+* Be able to borrow a book
+  * Time Picker
+* Admin/User Roles
+* Book list view
+* Individual book view w/ picture and description + borrow history
+* Navbar
 ## Build Setup
 
 ``` bash
