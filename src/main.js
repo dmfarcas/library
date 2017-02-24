@@ -6,7 +6,9 @@ import router from './router';
 import config from '../config/firebase.config.js';
 import firebase from 'firebase';
 import { initialize } from  './firebaseInstance';
+import VueFire from 'vuefire';
 
+Vue.use(VueFire)
 
 /* eslint-disable no-new */
 new Vue({

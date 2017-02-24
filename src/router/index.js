@@ -22,9 +22,9 @@ const router = new Router({
     {
       path: '/admin',
       name: 'Admin',
-      meta: {
-        requiresAuth: true,
-      },
+      // meta: { //TODO this should require auth AND the admin role ICHIM
+      //   requiresAuth: true,
+      // },
       component: Admin,
     },
      {
