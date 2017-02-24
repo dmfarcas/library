@@ -7,8 +7,11 @@ import config from '../config/firebase.config.js';
 import firebase from 'firebase';
 import { initialize } from  './firebaseInstance';
 import VueFire from 'vuefire';
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
 
 Vue.use(VueFire)
+Vue.use(ElementUI)
 
 /* eslint-disable no-new */
 new Vue({
