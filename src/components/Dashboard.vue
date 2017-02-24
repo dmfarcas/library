@@ -1,68 +1,54 @@
 <template>
-<div>
-      <h1>User Dashboard</h1>
- <ul is="transition-group">
-    <li v-for="user in users" class="user" :key="user['.key']">
-      <span>{{user.name}} - {{user.email}}</span>
-      <button v-on:click="removeUser(user)">X</button>
-    </li>
-  </ul>
-  <form id="form" v-on:submit.prevent="addUser">
-    <input type="text" v-model="newUser.name" placeholder="Username">
-    <input type="email" v-model="newUser.email" placeholder="email@email.com">
-    <input type="submit" value="Add User">
-  </form>
-  <ul class="errors">
-    <li v-show="!validation.name">Name cannot be empty.</li>
-    <li v-show="!validation.email">Please provide a valid email address.</li>
-  </ul>
+  <div id="list">
+    <h1>Items</h1>
+    <ul>
+      <li v-for="item in items">
+        {{ item.text }}
+        <button @click="removeTodo(item['.key'])">X</button>
+      </li>
+    </ul>
+    <form @submit.prevent="addTodo">
+      <input v-model="newTodo">
+      <button>Add #{{ items.length }}</button>
+    </form>
 
-
-  <button v-on:click="logout">Logout</button>
-</div>
+  </div>
 </template>
 
 
+
 <script>
-import { logout } from '../auth';
-import {db } from '../main'
-// import { database } from '../firebaseInstance';
-
-console.log(db);
+  import firebase from 'firebase';
+  import { database } from '../firebaseInstance';
 
 
-// console.log(database.ref('url/to/my/collection'));
+  var itemsRef = database.ref('/items');
 
-// import firebase from 'firebase';
-// // console.log(logout)
+  console.log(itemsRef);
 
-// var emailRE = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-// var usersRef = db.ref('users')
+  export default {
+      data: () => {
+        return {
+          newTodo: "",
+          items: []
+        }
+      },
+    firebase: {
+      items: database.ref('/items'),
+    },
+    methods: {
+      removeTodo: function (key) {
+        itemsRef.child(key).remove();
+      },
+      addTodo: function () {
+        if (this.newTodo.trim()) {
+          itemsRef.push({
+            text: this.newTodo
+          });
+          this.newTodo = "";
+        }
+      }
+    }
+  };
 
-export default {
-//   data: {
-//     newUser: {
-//       name: '',
-//       email: ''
-//     }
-//   },
-//   firebase: {
-//     users: usersRef
-//   },
-  methods: { 
-    logout: logout,
-//     addUser: function () {
-//       if (this.isValid) {
-//         usersRef.push(this.newUser)
-//         this.newUser.name = ''
-//         this.newUser.email = ''
-//       }
-//     },
-//     removeUser: function (user) {
-//       usersRef.child(user['.key']).remove()
-//     }
-  }
-//   events: {
-//   }
-};
 </script>

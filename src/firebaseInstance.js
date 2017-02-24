@@ -1,18 +1,11 @@
-// import firebase from 'firebase';
-// import config from '../config/firebase.config.js';
+import firebase from 'firebase';
+import config from '../config/firebase.config.js';
 // import VueFire from 'vuefire';
 // import Vue from 'vue';
 
 // Vue.use(VueFire)
 
-// let database;
+firebase.initializeApp(config);
+const database = firebase.database();
 
-// const initialize = () => {
-//   firebase.initializeApp(config);
-//   // database = firebase.database();
-//   // console.log(database);
-// }
-
-// // const database = 
-
-// export { initialize, database };
+export { database };

@@ -5,10 +5,8 @@ import App from './App';
 import router from './router';
 import config from '../config/firebase.config.js';
 import firebase from 'firebase';
-import VueFire from 'vuefire';
+import { initialize } from  './firebaseInstance';
 
-
-const db = firebase.initializeApp(config);
 
 /* eslint-disable no-new */
 new Vue({
@@ -17,7 +15,3 @@ new Vue({
   template: '<App/>',
   components: { App },
 });
-
-
-
-export default db; //TODO this could be cleaner, separated from vue logic
