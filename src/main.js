@@ -4,11 +4,13 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import { initialize } from  './firebaseInstance';
-import VueFire from 'vuefire';
+import VuexFire from 'vuefire';
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
+import Vuex from 'vuex'
+import store from './store'
 
-Vue.use(VueFire)
+Vue.use(VuexFire)
 Vue.use(ElementUI)
 
 /* eslint-disable no-new */
