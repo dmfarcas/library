@@ -10,6 +10,6 @@ export default new Vuex.Store({
   },
   mutations: VuexFire.mutations,
   getters: {
-    items: function (state) { return state.items }
+    items: state => state.items
   }
 })

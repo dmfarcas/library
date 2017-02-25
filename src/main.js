@@ -7,7 +7,6 @@ import { initialize } from  './firebaseInstance';
 import VuexFire from 'vuefire';
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
-import Vuex from 'vuex'
 import store from './store'
 
 Vue.use(VuexFire)
@@ -17,6 +16,7 @@ Vue.use(ElementUI)
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App },
 });
