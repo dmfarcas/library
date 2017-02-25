@@ -2,6 +2,7 @@
   <div id="list">
     <h1>Admin View</h1>
     <search></search>
+    <book></book>
     <ul>
       <li v-for="item in items">
         {{ item.text }}
@@ -9,7 +10,7 @@
       </li>
     </ul>
     <form @submit.prevent="addBook">
-      <input v-model="newBook"> 
+      <input v-model="newBook">
       <button>Add #{{ items.length }}</button>
     </form>
   </div>
@@ -18,7 +19,7 @@
 <script>
   import firebase from 'firebase';
   import { database } from '../../firebaseInstance';
-  import Book from '../Book'
+  import Book from './Book'
   import Search from './Search';
 
   var itemsRef = database.ref('/items');

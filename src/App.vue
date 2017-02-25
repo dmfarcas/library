@@ -1,6 +1,17 @@
 <template>
   <div id="app">
-    <h1>Library Application</h1>
+    <navigation></navigation>
     <router-view></router-view>
   </div>
 </template>
+
+
+<script>
+  import Navigation from './components/Navigation'
+
+  console.log(Navigation);
+
+  export default {
+    components: { Navigation }
+  }
+</script>

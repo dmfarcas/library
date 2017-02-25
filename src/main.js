@@ -3,8 +3,6 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
-import config from '../config/firebase.config.js';
-import firebase from 'firebase';
 import { initialize } from  './firebaseInstance';
 import VueFire from 'vuefire';
 import ElementUI from 'element-ui'
