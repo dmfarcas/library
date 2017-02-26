@@ -5,15 +5,19 @@
 
 ## TODO
 ...a todo list on trello?
-* Be able to add a book in the library. Be able to remove a book.
+~~* Be able to add a book in the library. Be able to remove a book.
   * Book component
-  * Read book list database
+  * Read book list database~~
 * Be able to borrow a book
   * Time Picker
 * Admin/User Roles
-* Book list view
-* Individual book view w/ picture and description + borrow history
-* Navbar
+~~* Book list view~~
+* Individual book view w/ picture and description + borrow history. This will be a dialog component.
+* Navbar -- the component is there, but it's useless...
+* Show a dialog on delete book to confirm book deletion.
+* Make book list pretty.
+* Make Admin view pretty.
+* Overall page layout fixes.
 ## Build Setup
 
 ``` bash
