@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Login from 'components/Login';
 import Admin from 'components/Admin/Admin';
-import Dashboard from 'components/Dashboard';
+import Dashboard from 'components/User/Dashboard';
 import NotFound from 'components/NotFound';
 import firebase from 'firebase';
 

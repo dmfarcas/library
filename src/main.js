@@ -7,8 +7,7 @@ import { initialize } from  './firebaseInstance';
 import VuexFire from 'vuefire';
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
-import store from './store'
-
+import store from './vuex/store'
 Vue.use(VuexFire)
 Vue.use(ElementUI)
 
