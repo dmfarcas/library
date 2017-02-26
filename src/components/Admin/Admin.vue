@@ -13,7 +13,6 @@
   import Search from './Search';
   import Vuex from 'vuex';
 
-  //Totally not copied from the todo app sample
   export default {
     components: { Books, Search }
   };

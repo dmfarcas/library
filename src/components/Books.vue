@@ -1,19 +1,29 @@
 <template>
-  <el-row>
-    <el-col :span="8" v-for="book in books">
-      <el-card :body-style="{ padding: '0px' }">
-        <img :src="book.image.thumbnail" class="image">
-        <div style="padding: 14px;">
-          <span>{{ book.title }}</span>
-          <div class="bottom clearfix">
-            <small class="time">{{ book.description }}</small>
-            <el-button plain type="text" class="button" @click="details(book['.key'])">Details</el-button>
-            <el-button plain type="text" class="button" @click="removeBook(book['.key'])">Delete</el-button>
+  <div>
+    <el-row>
+      <el-col :span="8" v-for="book in books">
+        <el-card :body-style="{ padding: '0px' }">
+          <img :src="book.image.thumbnail" class="image">
+          <div style="padding: 14px;">
+            <span>{{ book.title }}</span>
+            <div class="bottom clearfix">
+              <small class="time">{{ book.description }}</small>
+              <el-button plain type="text" class="button" @click="details(book['.key'])">Details</el-button>
+              <el-button plain type="text" class="button" @click="removeBook(book['.key'])">Delete</el-button>
+            </div>
           </div>
-        </div>
-      </el-card>
-    </el-col>
-  </el-row>
+        </el-card>
+      </el-col>
+    </el-row>
+
+    <el-dialog title="Tips" v-model="dialogVisible" size="tiny">
+    <span>This is a message</span>
+    <span slot="footer" class="dialog-footer">
+      <el-button type="primary" @click="dialogVisible = false">Done</el-button>
+    </span>
+  </el-dialog>
+
+  </div>
 </template>
 
 <script>
@@ -23,11 +33,11 @@
 
   const booksRef = database.ref('books');
   export default Vue.extend({
-    // data() {
-    //   return {
-    //     books: ""
-    //   };
-    // },
+    data() {
+      return {
+        dialogVisible: false
+      };
+    },
     computed: Vuex.mapGetters([
       "/books"
     ]),
@@ -39,6 +49,7 @@
         console.log(key, keyPath);
       },
       details (key) {
+        this.dialogVisible = true;
         console.log("//TODO");
       },
       removeBook (key) {

@@ -1,19 +1,6 @@
 //Add a book to the database...
 //The application is currently stateless by Vuex standards. State is took care of by Firebase ATM
 
-
-      // removeBook (key) {
-      //   itemsRef.child(key).remove();
-      // },
-      // addBook () {
-      //   if (this.newBook.trim()) {
-      //     itemsRef.push({
-      //       text: this.newBook
-      //     });
-      //     this.newBook = "";
-      //   }
-      // }
-
 const mutations = {
   addBook (state, book) {
     console.log("BOOKY BOOK", book);
@@ -26,5 +13,4 @@ const mutations = {
 }
 
 
-export default mutations
-
+export default mutations;

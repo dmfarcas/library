@@ -9,7 +9,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    items: null
+    items: null,
+    books: null
   },
   actions,
   mutations,
