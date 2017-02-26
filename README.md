@@ -10,6 +10,7 @@
 * Admin/User Roles
 * Individual book view w/ picture and description + borrow history. This will be a dialog component.
 * Navbar -- the component is there, but it's useless...
+  * Title | User list, Book list, Logout
 * Show a dialog on delete book to confirm book deletion.
 * Make book list pretty.
 * Make Admin view pretty.
