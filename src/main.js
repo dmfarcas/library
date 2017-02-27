@@ -8,8 +8,14 @@ import VuexFire from 'vuefire';
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import store from './vuex/store'
+import firebase from 'firebase'
 Vue.use(VuexFire)
 Vue.use(ElementUI)
+
+console.log("THIS USER IS LOGED", firebase.auth().currentUser);
+import { init } from './auth';
+
+init();
 
 /* eslint-disable no-new */
 new Vue({

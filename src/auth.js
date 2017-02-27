@@ -14,7 +14,7 @@ const initAuthUI = function initAuthUI() {
   // firebaseui is imported by script tag
   // FirebaseUI config.
   const uiConfig = {
-    signInSuccessUrl: '',
+    signInSuccessUrl: '/dashboard',
     signInOptions: [
       // Leave the lines as is for the providers you want to offer your users.
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -32,6 +32,7 @@ const initAuthUI = function initAuthUI() {
 
 const init = function init() {
   firebase.auth().onAuthStateChanged((theUser) => {
+    console.log("AUTH STATE CHANGED", theUser);
     if (theUser) {
       user.displayName = theUser.displayName;
       user.email = theUser.email;

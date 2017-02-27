@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading.body="loading">
     <el-row>
       <el-col :span="8" v-for="book in books">
         <el-card :body-style="{ padding: '0px' }">
@@ -32,10 +32,13 @@
   import { database } from '../firebaseInstance'
 
   const booksRef = database.ref('books');
+
+
   export default Vue.extend({
     data() {
       return {
-        dialogVisible: false
+        dialogVisible: false,
+        loading: true
       };
     },
     computed: Vuex.mapGetters([
@@ -62,8 +65,10 @@
         });
       },
     },
-    mounted () {
-      console.log(this.books);
+    mounted() {
+      booksRef.on('value', () => { //when data arrived
+        this.loading = false;
+      })
     }
   });
 </script>
