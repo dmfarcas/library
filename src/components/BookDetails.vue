@@ -1,6 +1,6 @@
 <template lang="html">
   <el-dialog title="Tips" v-model="dialogVisible" size="tiny">
-  <span>This is a message</span>
+  <!-- <span>{{currentBook.description }}</span> -->
   <span slot="footer" class="dialog-footer">
     <el-button type="primary" @click="dialogVisible = false">Done</el-button>
   </span>
@@ -9,18 +9,25 @@
 
 <script>
 import Vue from 'vue';
+import eventHub from '../EventHub';
 
 export default Vue.extend({
   data() {
     return {
+      currentBook: null,
       dialogVisible: false,
     };
   },
   methods: {
-    details (key) {
+    details (currentBook) {
+      this.currentBook = currentBook;
+      console.log(currentBook);
       this.dialogVisible = true;
-      console.log("//TODO");
+
     }
+  },
+  created() {
+    eventHub.$on('open-modal', this.details)
   }
 });
 </script>

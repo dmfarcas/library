@@ -25,8 +25,11 @@
   import Vuex from 'vuex';
   import BookDetails from './BookDetails';
   import { database } from '../firebaseInstance'
+  import eventHub from '../EventHub'
 
   const booksRef = database.ref('books');
+
+  // var eventHub = new Vue()
 
 
   export default Vue.extend({
@@ -43,7 +46,8 @@
     },
     methods: {
       details(book) {
-        this.$emit('open-modal', book)
+        console.log("OPENING DETAILS");
+        eventHub.$emit('open-modal', book)
       },
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
