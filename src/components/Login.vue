@@ -1,9 +1,8 @@
 <template>
   <div id="app">
     <article class="main" v-bind:class="{'start': !user.uid}">
-
       <div class="login" v-show="!user.uid">
-        <h1>Login</h1>
+        <h3 class="text-center">Login</h3>
         <div id="firebaseui-auth-container"></div>
       </div>
     </article>
@@ -18,9 +17,8 @@
   const user = getUser();
   const initApp = function initApp() {
     init();
-  }
+  };
 
-  
   export default {
     data() {
       return { user };

@@ -63,7 +63,7 @@ const getUser = function getUser() {
 const logout = function logout() {
   firebase.auth().signOut().then(() => {
     // Sign-out successful.
-    window.location.reload();
+    window.location.replace('/login');
   }, (error) => {
     // An error happened.
     console.log(error);
