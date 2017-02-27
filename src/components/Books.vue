@@ -1,6 +1,6 @@
 <template>
-  <div v-loading.body="loading">
-    <el-row>
+  <div class="book-container">
+    <el-row v-loading.body="loading">
       <el-col :span="8" v-for="book in books">
         <el-card :body-style="{ padding: '0px' }">
           <img :src="book.image.thumbnail" class="image">
@@ -15,13 +15,7 @@
         </el-card>
       </el-col>
     </el-row>
-
-    <el-dialog title="Tips" v-model="dialogVisible" size="tiny">
-    <span>This is a message</span>
-    <span slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="dialogVisible = false">Done</el-button>
-    </span>
-  </el-dialog>
+    <book-details></book-details>
 
   </div>
 </template>
@@ -29,6 +23,7 @@
 <script>
   import Vue from 'vue';
   import Vuex from 'vuex';
+  import BookDetails from './BookDetails';
   import { database } from '../firebaseInstance'
 
   const booksRef = database.ref('books');
@@ -37,8 +32,7 @@
   export default Vue.extend({
     data() {
       return {
-        dialogVisible: false,
-        loading: true
+        loading: false
       };
     },
     computed: Vuex.mapGetters([
@@ -48,12 +42,11 @@
       books: booksRef,
     },
     methods: {
+      details(book) {
+        this.$emit('open-modal', book)
+      },
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
-      },
-      details (key) {
-        this.dialogVisible = true;
-        console.log("//TODO");
       },
       removeBook (key) {
 
@@ -65,7 +58,9 @@
         });
       },
     },
+    components: { BookDetails },
     mounted() {
+      this.loading = true;
       booksRef.on('value', () => { //when data arrived
         this.loading = false;
       })
@@ -73,6 +68,10 @@
   });
 </script>
 <style>
+  .book-container {
+    min-height:1000px;
+    }
+
   .time {
     font-size: 13px;
     color: #999;
