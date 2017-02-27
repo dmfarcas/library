@@ -54,7 +54,7 @@
       },
       removeBook (key) {
 
-      booksRef.child(key).remove();
+        booksRef.child(key).remove();
         this.$notify({
           title: 'Deleted',
           message: 'Successfuly deleted book!',
@@ -74,7 +74,7 @@
 <style>
   .book-container {
     min-height:1000px;
-    }
+  }
 
   .time {
     font-size: 13px;
