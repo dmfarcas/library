@@ -19,7 +19,7 @@
             <h1 class="product-list-item-title">
               <a @click="details(book['.key'])" class="cursor-hover">{{ book.title }}</a>
             </h1>
-            <span class="product-list-item-author">{{ book.authors }} </span>
+            <span class="product-list-item-author">{{ book.authors.join(", ") }} </span>
             <span class="product-list-item-brand"><span class="product-list-item-brand-type">Editura:</span> Nume</span>
             <ul class="product-list-item-details">
               <li><strong>Format</strong> : Paperback</li>
@@ -28,7 +28,7 @@
             </ul>
             <div class="product-list-item-share">
               <div class="social-icons">
-                <el-button plain type="text" class="button" @click="details(book['.key'])">Details</el-button>
+                <el-button plain type="text" class="button" @click="details(book)">Details</el-button>
                 <el-button plain type="text" class="button" :href="book.preview" target="_blank">Preview</el-button>
                 <el-button plain type="text" class="button" @click="removeBook(book['.key'])">Delete</el-button>
               </div>
@@ -70,6 +70,15 @@
       },
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
+      },
+      removeBook(key) {
+        booksRef.child(key).remove();
+          this.$notify({
+            title: 'Deleted',
+            message: 'Successfuly deleted book!',
+            type: 'success'
+          });
+        this.dialogVisible = false;
       }
     },
     components: { BookDetails },

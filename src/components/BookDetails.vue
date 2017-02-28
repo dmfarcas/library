@@ -5,7 +5,6 @@
   <calendar></calendar>
   <span slot="footer" class="dialog-footer">
     <el-button type="primary" @click="dialogVisible = false">Done</el-button>
-    <el-button type="danger" class="button" @click="removeBook(currentBook['.key'])">Delete</el-button>
   </span>
   </el-dialog>
 </template>
@@ -34,18 +33,9 @@ export default Vue.extend({
   methods: {
     details (currentBook) {
       this.currentBook = currentBook;
-      console.log(currentBook);
+      console.log("CUR", currentBook);
       this.dialogVisible = true;
 
-    },
-    removeBook(key) {
-      booksRef.child(key).remove();
-        this.$notify({
-          title: 'Deleted',
-          message: 'Successfuly deleted book!',
-          type: 'success'
-        });
-      this.dialogVisible = false;
     }
   },
   created() {
