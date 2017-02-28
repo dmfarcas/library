@@ -28,7 +28,6 @@
 
   const booksRef = database.ref('books');
 
-  // var eventHub = new Vue()
 
 
   export default Vue.extend({
@@ -50,9 +49,7 @@
       },
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
-      },
-      removeBook (key) {
-      },
+      }
     },
     components: { BookDetails },
     mounted() {
@@ -66,7 +63,7 @@
 <style>
   .book-container {
     min-height:1000px;
-    }
+  }
 
   .time {
     font-size: 13px;
