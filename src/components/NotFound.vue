@@ -1,5 +1,7 @@
 <template>
-  <h1>Not Found.</h1>
+  <div class="main-container">
+    <h3>Not Found.</h3>
+  </div>
 </template>
 
 <script>

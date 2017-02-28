@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Login from 'components/Login';
 import Admin from 'components/Admin/Admin';
 import Dashboard from 'components/User/Dashboard';
+import Resources from 'components/Resources';
 import NotFound from 'components/NotFound';
 import firebase from 'firebase';
 
@@ -36,6 +37,11 @@ const router = new Router({
       component: Dashboard,
     },
     {
+      path: '/resources',
+      name: 'Resources',
+      component: Resources,
+    },
+    {
       path: '*',
       name: 'NotFound',
       component: NotFound,
@@ -44,27 +50,27 @@ const router = new Router({
 });
 
 
-router.beforeEach((to, from, next) => {
-  firebase.auth().onAuthStateChanged((user) => {
-    if (to.path === "/") {
-      if (user) {
-        next('/dashboard');
-      } else {
-        next('/login');
-      }
-    }
-  });
-
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!firebase.auth().currentUser) {
-      next('/');
-    } else {
-      next();
-    }
-  } else {
-    next();
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   firebase.auth().onAuthStateChanged((user) => {
+//     if (to.path === "/") {
+//       if (user) {
+//         next('/dashboard');
+//       } else {
+//         next('/login');
+//       }
+//     }
+//   });
+//
+//   if (to.matched.some(record => record.meta.requiresAuth)) {
+//     if (!firebase.auth().currentUser) {
+//       next('/');
+//     } else {
+//       next();
+//     }
+//   } else {
+//     next();
+//   }
+// });
 
 
 export default router;

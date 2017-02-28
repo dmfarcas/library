@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-search">
     <el-autocomplete
       popper-class="my-autocomplete"
       v-model="textfieldBook"
@@ -8,33 +8,46 @@
       :trigger-on-focus="false"
       @select="handleSelect"
       icon="plus"
-      :on-icon-click="handleIconClick"
+      :on-icon-click="addBook"
       custom-item="my-item-en"
     ></el-autocomplete>
-    <el-button
-      type="primary"
-      @click="addBook"
-      :disabled="disabled"
-      icon="plus"
-    ></el-button>
   </div>
 </template>
 
 <style>
-  .my-autocomplete {
+  .el-autocomplete {
+    width: 100%;
+  }
+  .container-search {
+    margin-top: 9px;
+  }
   li {
     line-height: normal;
     padding: 7px;
-
-  .value {
+    position: relative;
+  }
+  .title {
+    margin-left: 15px;
+    display: inline;
     text-overflow: ellipsis;
     overflow: hidden;
   }
-  .link {
+  .description {
+    font-size: 12px;
+    margin-left: 15px;
+  }
+  .authors {
+    margin-left: 15px;
     font-size: 12px;
     color: #b4b4b4;
+    line-height: 12px;
   }
-  }
+  .img-search {
+    float: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 100px;
+    display: inline;
   }
 </style>
 
@@ -51,8 +64,9 @@
     render: function (h, ctx) {
       var item = ctx.props.item;
       return h('li', ctx.data, [
-        h('div', { attrs: { class: 'value' } }, [item.value]),
-        h('span', { attrs: { class: 'authors' } }, [item.authors])
+        h('img', { attrs: { src: item.image.smallThumbnail, class: 'img-search' } }, []),
+        h('div', { attrs: { class: 'title' } }, [item.value]),
+        h('div', { attrs: { class: 'authors' } }, [item.authors])
       ]);
     },
     props: {
@@ -103,9 +117,12 @@
         this.disabled = true;
         //clears the field..
         this.textfieldBook = '';
-        // this.$store.commit('addBook', this.selectedItem)
-        booksRef.push(this.selectedItem);
-
+        if (this.selectedItem) {
+          booksRef.push(this.selectedItem);
+        } else {
+          //TODO maybe a dialog not allowed put
+          console.log('book is not selected');
+        }
       },
       querySearchAsync,
       createFilter (queryString) {
@@ -116,13 +133,6 @@
       handleSelect (item) {
         this.selectedItem = item;
         this.disabled = false;
-      },
-      handleIconClick(ev) {
-          if (this.selectedItem) {
-              console.log('zzz', this.selectedItem);
-              booksRef.push(this.selectedItem)
-          }
-        console.log(ev);
       }
     }
 
