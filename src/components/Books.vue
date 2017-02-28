@@ -8,8 +8,7 @@
             <span>{{ book.title }}</span>
             <div class="bottom clearfix">
               <small class="time">{{ book.description }}</small>
-              <el-button plain type="text" class="button" @click="details(book['.key'])">Details</el-button>
-              <el-button plain type="text" class="button" @click="removeBook(book['.key'])">Delete</el-button>
+              <el-button plain type="text" class="button" @click="details(book)">Details</el-button>
             </div>
           </div>
         </el-card>
@@ -53,13 +52,6 @@
         console.log(key, keyPath);
       },
       removeBook (key) {
-
-      booksRef.child(key).remove();
-        this.$notify({
-          title: 'Deleted',
-          message: 'Successfuly deleted book!',
-          type: 'success'
-        });
       },
     },
     components: { BookDetails },

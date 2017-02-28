@@ -3,12 +3,8 @@
     <div class="container">
       <div class="footer-main">
         <p class="footer-main-title">
-          Element 1.2.1 Lithium</p>
-        <a href="https://github.com/ElemeFE/element/issues" target="_blank" class="footer-main-link">Feedback</a>\
-        <a href="https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.en-US.md" target="_blank" class="footer-main-link">Contribution</a>
-      </div>
-      <div class="footer-social">
-            <img src="../assets/logo-assist.png" alt="" width="100" style="margin-top:30px;">
+          Library App</p>
+        <a href="https://github.com/dmfarcas/library" target="_blank" class="footer-main-link">Contribution</a>
       </div>
     </div>
   </footer>
