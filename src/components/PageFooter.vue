@@ -2,9 +2,11 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-main">
-        <p class="footer-main-title">
-          Library App</p>
+        <p class="footer-main-title">Library App</p>
         <a href="https://github.com/dmfarcas/library" target="_blank" class="footer-main-link">Contribution</a>
+      </div>
+      <div class="footer-social">
+        <img src="../assets/logo-assist.png" alt="" width="100" style="margin-top:30px;">
       </div>
     </div>
   </footer>
@@ -22,11 +24,13 @@
 <style>
   .footer {
     height: 120px;
-    background-color: #324057;
+    background-color: #324057!important;
     color: #a4aebd;
     width: 100%;
     z-index: 1000;
-    margin-top: -120px
+    margin-top: -120px;
+    position: absolute;
+    bottom: 0;
   }
 
   .footer * {

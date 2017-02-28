@@ -18,6 +18,7 @@
 
 <style>
   body {
+    position: relative;
     margin: 0px;
   }
   #app {

@@ -1,8 +1,8 @@
 <template>
   <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
     <el-menu-item index="0" class="logo-header"><img src="../assets/logo-assist.png" alt="" width="100"></el-menu-item>
-    <el-menu-item index="1"><router-link v-bind:to="'admin'">Dashboard</router-link></el-menu-item>
-    <el-menu-item index="3"><router-link v-bind:to="'dashboard'">Books</router-link></el-menu-item>
+    <el-menu-item index="1"><router-link v-bind:to="'dashboard'">Dashboard</router-link></el-menu-item>
+    <el-menu-item index="3"><router-link v-bind:to="'admin'">Admin</router-link></el-menu-item>
     <el-menu-item index="4"><a href="/resources" target="_self">Resources</a></el-menu-item>
     <el-submenu class="toggle-login" v-bind:class="{ hidden: !isLoggedIn }" index="2">
       <template slot="title">{{ displayName }}</template>
