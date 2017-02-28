@@ -84,4 +84,10 @@
     font-size: 14px;
     color: #5e6d82
   }
+  .main-container {
+    margin-top: -80px;
+    padding: 80px 15px 150px;
+    box-sizing: border-box;
+    min-height: 100%;
+  }
 </style>

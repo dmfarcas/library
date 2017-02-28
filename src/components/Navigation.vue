@@ -3,10 +3,9 @@
     <el-menu-item index="0" class="logo-header"><img src="../assets/logo-assist.png" alt="" width="100"></el-menu-item>
     <el-menu-item index="dashboard">Dashboard</el-menu-item>
     <el-menu-item index="admin">Admin</el-menu-item>
-    <el-menu-item index="4"><a href="/resources" target="_self">Resources</a></el-menu-item>
+    <el-menu-item index="resources">Resources</el-menu-item>
     <el-submenu class="toggle-login" v-bind:class="{ hidden: !isLoggedIn }" index="2">
       <template slot="title">{{ displayName }}</template>
-      <el-menu-item index="2-1">Edit</el-menu-item>
       <el-menu-item index="2-2" v-on:click="logout">Logout</el-menu-item>
     </el-submenu>
     <el-menu-item class="toggle-login" v-bind:class="{ hidden: isLoggedIn }" index="5"><router-link v-bind:to="'login'">Login</router-link></el-menu-item>
