@@ -1,30 +1,30 @@
 <template>
   <div class="book-container">
     <el-row v-loading.body="loading">
-
+      <ul>
+        <li v-for="borrow in borrows">{{ borrow }}</li>
+      </ul>
       <div class="product-list-container clearfix">
         <article class="product-list-item clearfix" v-for="book in books">
           <a @click="details(book['.key'])" class="product-list-item-image-container cursor-hover">
-            <img class="product-list-item-image" :src="book.image.thumbnail" alt="aaa">
+            <img class="product-list-item-image" :src="book.image.thumbnail" alt="alternative-image">
           </a>
           <div class="product-list-item-price">
             <div class="price-container">
               <div class="price-old-container clearfix">
-                <span class="price-percent">Pagini:</span>
+                <span class="price-percent">Pagini</span>
               </div>
               <span class="price-good">{{book.pageCount}}</span>
             </div>
           </div>
           <div class="product-list-item-info">
             <h1 class="product-list-item-title">
-              <a @click="details(book['.key'])" class="cursor-hover">{{ book.title }}</a>
+              <h4>{{ book.value }}</h4>
             </h1>
-            <span class="product-list-item-author">{{ book.authors.join(", ") }} </span>
-            <span class="product-list-item-brand"><span class="product-list-item-brand-type">Editura:</span> Nume</span>
+            <span class="product-list-item-author">{{ book.authors.length > 1 ? book.authors.join(", ")  : book.authors[0]}} </span>
             <ul class="product-list-item-details">
-              <li><strong>Format</strong> : Paperback</li>
-              <li><strong>Data Publicarii</strong> : 06 Aug 2015</li>
-              <li><strong>ISBN</strong> : 9780241217931</li>
+              <li><strong>Editura</strong>: {{book.publisher}}</li>
+              <li><strong>Categorii</strong>: {{ book.categories.length > 1 ? book.categories.join(", ")  : book.categories[0] }}</li>
             </ul>
             <div class="product-list-item-share">
               <div class="social-icons">
@@ -48,8 +48,11 @@
   import BookDetails from './BookDetails';
   import { database } from '../firebaseInstance'
   import eventHub from '../EventHub'
+  import firebase from 'firebase';
 
   const booksRef = database.ref('books');
+  const borrowsRef = database.ref('borrows');
+  const usersRef = database.ref('users');
 
   export default Vue.extend({
     data() {
@@ -57,11 +60,25 @@
         loading: false
       };
     },
-    computed: Vuex.mapGetters([
-      "/books"
-    ]),
+    created() {
+        // console.log("Boox", this.books);
+        // console.log(this.borrows);
+        // console.log(this.users);
+        // console.log(this.books.length);
+
+    },
+    computed: { //aici is chestii de returnat pe componente
+      isBookCurrentlyBorrowed() {
+        const currentDate = new Date();
+
+        console.log(this.books.length);
+
+      }
+    },
     firebase: {
       books: booksRef,
+      borrows: borrowsRef,
+      users: usersRef
     },
     methods: {
       details(book) {
@@ -81,8 +98,10 @@
         this.dialogVisible = false;
       }
     },
+    // computed:
     components: { BookDetails },
     mounted() {
+      console.log(this.$firebaseRefs.books)
       this.loading = true;
       booksRef.on('value', () => { //when data arrived
         this.loading = false;

@@ -14,7 +14,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
   .el-autocomplete {
     width: 100%;
   }
@@ -84,10 +84,13 @@
           return {
             value: e.volumeInfo.title, //TODO how to send title directly in the callback.
             title: e.volumeInfo.title || '',
+            subtitle: e.volumeInfo.subtitle || '',
             description: e.volumeInfo.description || '',
             image: e.volumeInfo.imageLinks || '',
             pageCount: e.volumeInfo.pageCount || '',
             categories: e.volumeInfo.categories || '',
+            publisherDate: e.volumeInfo.publisherDate || '',
+            publisher: e.volumeInfo.publisher || '',
             authors: e.volumeInfo.authors || '',
             preview: e.volumeInfo.previewLink || ''
           }
@@ -112,7 +115,6 @@
     },
     methods: {
       addBook () {
-        console.log("ADDING BOOK");
         //button is now disabled
         this.disabled = true;
         //clears the field..
