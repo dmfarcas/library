@@ -1,9 +1,6 @@
 <template>
   <div class="book-container">
     <el-row v-loading.body="loading">
-      <ul>
-        <li v-for="borrow in borrows">{{ borrow }}</li>
-      </ul>
       <div class="product-list-container clearfix">
         <article class="product-list-item clearfix" v-for="book in books">
           <a @click="details(book['.key'])" class="product-list-item-image-container cursor-hover">
