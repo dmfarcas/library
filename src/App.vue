@@ -26,7 +26,7 @@
     min-height: 700px;
   }
   .hidden {
-    display: none;
+    /*display: none;*/
   }
   .text-center {
     text-align: center;

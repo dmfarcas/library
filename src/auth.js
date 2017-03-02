@@ -34,7 +34,6 @@ const initAuthUI = function initAuthUI() {
 
 const init = function init() {
   firebase.auth().onAuthStateChanged((theUser) => {
-    console.log("AUTH STATE CHANGED", theUser);
     if (theUser) {
       user.displayName = theUser.displayName;
       user.email = theUser.email;

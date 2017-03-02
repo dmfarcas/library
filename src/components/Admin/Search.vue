@@ -52,7 +52,6 @@
 </style>
 
 <script>
-  //TODO the autocomplete result should contain Author/Title and maybe a picture?
   import Vue from 'vue';
   import { mapActions } from 'vuex';
   import { database } from '../../firebaseInstance';
@@ -121,9 +120,6 @@
         this.textfieldBook = '';
         if (this.selectedItem) {
           booksRef.push(this.selectedItem);
-        } else {
-          //TODO maybe a dialog not allowed put
-          console.log('book is not selected');
         }
       },
       querySearchAsync,

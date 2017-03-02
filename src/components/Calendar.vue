@@ -6,7 +6,7 @@
       type="daterange"
       align="right"
       placeholder="Pick a range"
-      :picker-options="pickerOptions2">
+      :picker-options="pickerOptions">
     </el-date-picker>
     <el-button @click="borrowBook()" type="primary">Borrow</el-button>
     <p v-if="rangeTooHigh">Range too high. Maximum is 14 days.</p>
@@ -17,6 +17,7 @@ import Vue from 'vue';
 import eventHub from '../EventHub';
 import { database } from '../firebaseInstance'
 import firebase from 'firebase';
+import moment from 'moment';
 
 const booksRef = database.ref('books');
 const borrowsRef = database.ref('borrows');
@@ -29,39 +30,41 @@ export default Vue.extend({
   data() {
     return {
       rangeTooHigh: false,
-      pickerOptions2: {
-        firstDayOfWeek: 1,
-        disabledDate(dateRendering) {
-          const yesterday = new Date((new Date()).valueOf() - 1000*60*60*24);
-          if (dateRendering < yesterday) return true;
-        },
-        // shortcuts: [{
-        //   text: 'One week',
-        //   onClick(picker) {
-        //     const end = new Date();
-        //     const start = new Date();
-        //     console.log('sta', )
-        //     start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-        //     picker.$emit('pick', [start, end]);
-        //   }
-        // }, {
-        //   text: 'Two weeks',
-        //   onClick(picker) {
-        //     const end = new Date();
-        //     const start = new Date();
-        //     start.setTime(start.getTime() + 3600 * 1000 * 24 * 14);
-        //     picker.$emit('pick', [start, end]);
-        //   }
-        // }]
-      },
-      dateRange: []
+      dateRange: [],
+      dirtyHack: []
     };
   },
   methods: {
     borrowBook () {
       const userBorrowsRef = database.ref(`borrows/${this.bookKey}`);
-      debugger;
       userBorrowsRef.child(firebase.auth().currentUser.uid).update(this.dateRange)
+    }
+  },
+  computed: {
+    pickerOptions() {
+      var vm = this;
+      return {            
+       firstDayOfWeek: 1,
+       disabledDate(dateRendering) {
+          //  console.log(dateRendering);
+          const yesterday = new Date((new Date()).valueOf() - 1000*60*60*24);
+          if (dateRendering < yesterday) return true;
+
+          const listOfUsersThatBorrowBook = vm.borrows.filter(e => { return e[".key"] === vm.bookKey })[0];
+          if (!listOfUsersThatBorrowBook) return false;
+          const listOfIntervalsOccupied = Object.keys(listOfUsersThatBorrowBook).map(key => listOfUsersThatBorrowBook[key]);
+          vm.dirtyHack = _.remove(listOfIntervalsOccupied, e => typeof e === "object");
+
+          // console.log(dirtyHack.forEach(range => console.log(range[0], range[1])));
+          // debugger;
+
+          // console.log(dateRendering);
+          return vm.dirtyHack.forEach((range) => {
+            // vm.dirtyHack.splice(1);
+            return moment(dateRendering).isBetween(range[0], range[1])
+          });
+        }
+      }
     }
   },
   watch: {

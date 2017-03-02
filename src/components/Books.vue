@@ -8,7 +8,7 @@
         <article class="product-list-item clearfix" v-for="book in books">
           <a @click="details(book['.key'])" class="product-list-item-image-container cursor-hover">
 
-            <div v-if="isBookBorrowed(book['.key'])">
+            <div v-if="true === false">
               <el-badge value="borrowed" class="item">
                 <img class="product-list-item-image" :src="book.image.thumbnail" alt="alternative-image">
               </el-badge>
@@ -36,7 +36,7 @@
               <li><strong>Categorii</strong>: {{ book.categories.length > 1 ? book.categories.join(", ")  : book.categories[0] }}</li>
             </ul>
             <div class="product-list-item-share">
-              <div class="social-icons">
+              <div>
                 <el-button plain type="text" class="button" @click="details(book)">Details</el-button>
                 <el-button plain type="text" class="button" :href="book.preview" target="_blank">Preview</el-button>
                 <el-button plain type="text" class="button" @click="removeBook(book['.key'])">Delete</el-button>
@@ -68,42 +68,13 @@
         loading: false
       };
     },
-    created() {
-        // console.log("Boox", this.books);
-        // console.log(this.borrows);
-        // console.log(this.users);
-        // console.log(this.books.length);
-
-    },
     firebase: {
       books: booksRef,
       borrows: borrowsRef,
       users: usersRef
     },
     methods: {
-      isBookBorrowed(bookKey) {
-        const currentDate = new Date();
-        // var plm = this.books.map((book) => {
-        //   return this.borrows.filter((borrow) => { if (book[".key"] === borrow[".key"]) { return { book } }  })
-        // })
-        //
-        // var plm = _.map(this.books, (book) => {
-        //   // console.log(_.find(this.books, {'.key': book["key"]}));
-        //   return _.find(this.borrows, {'.key': book["key"]})
-        // });
-
-        this.books.forEach((e, i) => {
-          _.merge(this.books[i], { "borrows": _.find(this.borrows, {".key": e[".key"] }) })
-        });
-
-        // console.log(booksBorrowed);
-        const currentBook = this.books.filter((e) => { if(e[".key"] === bookKey) return e })
-
-        console.log(currentBook);
-        return false
-      },
       details(book) {
-        console.log("OPENING DETAILS");
         eventHub.$emit('open-modal', book)
       },
       handleSelect(key, keyPath) {

@@ -45,7 +45,6 @@
     methods: {
       details (currentBook) {
         this.currentBook = currentBook;
-        console.log("CUR", currentBook);
         this.dialogVisible = true;
 
       }
