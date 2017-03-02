@@ -8,7 +8,7 @@
         <article class="product-list-item clearfix" v-for="book in books">
           <a @click="details(book['.key'])" class="product-list-item-image-container cursor-hover">
 
-            <div v-if="Math.random() > 0.5">
+            <div v-if="isBookBorrowed(book['.key'])">
               <el-badge value="borrowed" class="item">
                 <img class="product-list-item-image" :src="book.image.thumbnail" alt="alternative-image">
               </el-badge>
@@ -47,7 +47,6 @@
       </div>
     </el-row>
     <book-details></book-details>
-
   </div>
 </template>
 
@@ -58,7 +57,7 @@
   import { database } from '../firebaseInstance'
   import eventHub from '../EventHub'
   import firebase from 'firebase';
-
+  import _ from 'lodash';
   const booksRef = database.ref('books');
   const borrowsRef = database.ref('borrows');
   const usersRef = database.ref('users');
@@ -76,20 +75,33 @@
         // console.log(this.books.length);
 
     },
-    computed: { //aici is chestii de returnat pe componente
-      isBookCurrentlyBorrowed() {
-        const currentDate = new Date();
-
-        console.log(this.books.length);
-
-      }
-    },
     firebase: {
       books: booksRef,
       borrows: borrowsRef,
       users: usersRef
     },
     methods: {
+      isBookBorrowed(bookKey) {
+        const currentDate = new Date();
+        // var plm = this.books.map((book) => {
+        //   return this.borrows.filter((borrow) => { if (book[".key"] === borrow[".key"]) { return { book } }  })
+        // })
+        //
+        // var plm = _.map(this.books, (book) => {
+        //   // console.log(_.find(this.books, {'.key': book["key"]}));
+        //   return _.find(this.borrows, {'.key': book["key"]})
+        // });
+
+        this.books.forEach((e, i) => {
+          _.merge(this.books[i], { "borrows": _.find(this.borrows, {".key": e[".key"] }) })
+        });
+
+        // console.log(booksBorrowed);
+        const currentBook = this.books.filter((e) => { if(e[".key"] === bookKey) return e })
+
+        console.log(currentBook);
+        return false
+      },
       details(book) {
         console.log("OPENING DETAILS");
         eventHub.$emit('open-modal', book)
@@ -107,10 +119,11 @@
         this.dialogVisible = false;
       }
     },
-    // computed:
+    computed:{
+
+    },
     components: { BookDetails },
     mounted() {
-      console.log(this.$firebaseRefs.books)
       this.loading = true;
       booksRef.on('value', () => { //when data arrived
         this.loading = false;
