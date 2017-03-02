@@ -20,6 +20,7 @@
   body {
     position: relative;
     margin: 0px;
+    height: 100%;
   }
   #app {
     min-height: 700px;
@@ -88,6 +89,6 @@
     margin-top: -80px;
     padding: 80px 15px 150px;
     box-sizing: border-box;
-    min-height: 100%;
+    min-height: 920px;
   }
 </style>

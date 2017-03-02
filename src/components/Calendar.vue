@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="block">
+  <div class="block text-center mt15">
     <el-date-picker
       v-model="dateRange"
       format="dd.MM.yyyy"
@@ -77,4 +77,7 @@ export default Vue.extend({
 </script>
 
 <style lang="css">
+  .mt15 {
+    margin-top: 15px;
+  }
 </style>

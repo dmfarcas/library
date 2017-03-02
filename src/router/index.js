@@ -4,6 +4,7 @@ import Login from 'components/Login';
 import Admin from 'components/Admin/Admin';
 import Dashboard from 'components/User/Dashboard';
 import Resources from 'components/Resources';
+import Nas from 'components/Nas';
 import NotFound from 'components/NotFound';
 import firebase from 'firebase';
 
@@ -40,6 +41,11 @@ const router = new Router({
       path: '/resources',
       name: 'Resources',
       component: Resources,
+    },
+    {
+      path: '/nas',
+      name: 'Nas',
+      component: Nas,
     },
     {
       path: '*',
