@@ -4,9 +4,9 @@
     <el-row>
       <el-col :span="24">
         <div id="list">
-          <el-row>
-            <el-col :span="8"><h3 class="text-center">Admin View</h3></el-col>
-            <el-col :span="16"><search></search></el-col>
+          <h3 class="text-center">Admin View</h3>
+          <el-row :gutter="20">
+            <el-col :span="12" :offset="6"><search></search></el-col>
           </el-row>
           <books></books>
         </div>
