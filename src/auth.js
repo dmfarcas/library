@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import firebaseUiAuthCss from './vendors/firebase-ui-auth.css'; /* eslint no-unused-vars: 0 */
 import firebaseui from 'firebaseui';
-
+import { database } from './firebaseInstance'
 const user = {
   displayName: '',
   email: '',
@@ -9,6 +9,8 @@ const user = {
   photoURL: '',
   uid: '',
 };
+
+const usersRef = database.ref('users');
 
 const initAuthUI = function initAuthUI() {
   // firebaseui is imported by script tag
@@ -39,9 +41,11 @@ const init = function init() {
       user.emailVerified = theUser.emailVerified;
       user.photoURL = theUser.photoURL;
       user.uid = theUser.uid;
+      user.lastLoggedIn = new Date();
 
-      // Object.assign(user, theUser);
-      // console.log(user.uid);
+      usersRef.child(firebase.auth().currentUser.uid).update(user);
+
+
     } else {
       // User is signed out.
       // console.log('signed out');

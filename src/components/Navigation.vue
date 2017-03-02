@@ -1,5 +1,5 @@
 <template>
-  <el-menu router="true" theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+  <el-menu :router="true" theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
     <el-menu-item index="0" class="logo-header"><img src="../assets/logo-assist.png" alt="" width="100"></el-menu-item>
     <el-menu-item index="dashboard">Dashboard</el-menu-item>
     <el-menu-item index="admin">Admin</el-menu-item>
@@ -35,8 +35,13 @@
     },
     mounted() {
       firebase.auth().onAuthStateChanged((user) => {
-        this.displayName = user.displayName;
-        this.isLoggedIn = user;
+        if (user) {
+          this.displayName = user.displayName;
+          this.isLoggedIn = user;
+        } else {
+          // this.displayName = user.displayName;
+        }
+
       });
     }
   });

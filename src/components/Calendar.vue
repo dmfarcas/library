@@ -1,58 +1,79 @@
 <template lang="html">
   <div class="block">
-    <span class="demonstration">Book Calendar</span>
     <el-date-picker
-      v-model="value7"
+      v-model="dateRange"
+      format="dd.MM.yyyy"
       type="daterange"
       align="right"
       placeholder="Pick a range"
       :picker-options="pickerOptions2">
     </el-date-picker>
+    <el-button @click="borrowBook()" type="primary">Borrow</el-button>
+    <p v-if="rangeTooHigh">Range too high. Maximum is 14 days.</p>
 </template>
 
 <script>
 import Vue from 'vue';
 import eventHub from '../EventHub';
 import { database } from '../firebaseInstance'
-
+import firebase from 'firebase';
 
 const booksRef = database.ref('books');
+const borrowsRef = database.ref('borrows');
 
 export default Vue.extend({
-    data() {
-      return {
-        pickerOptions2: {
-          shortcuts: [{
-            text: 'Last week',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: 'Last month',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: 'Last 3 months',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit('pick', [start, end]);
-            }
-          }]
+  props: ['bookKey'],
+  firebase: {
+    borrows: borrowsRef,
+  },
+  data() {
+    return {
+      rangeTooHigh: false,
+      pickerOptions2: {
+        firstDayOfWeek: 1,
+        disabledDate(dateRendering) {
+          const yesterday = new Date((new Date()).valueOf() - 1000*60*60*24);
+          if (dateRendering < yesterday) return true;
         },
-        value6: '',
-        value7: ''
-      };
+        // shortcuts: [{
+        //   text: 'One week',
+        //   onClick(picker) {
+        //     const end = new Date();
+        //     const start = new Date();
+        //     console.log('sta', )
+        //     start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+        //     picker.$emit('pick', [start, end]);
+        //   }
+        // }, {
+        //   text: 'Two weeks',
+        //   onClick(picker) {
+        //     const end = new Date();
+        //     const start = new Date();
+        //     start.setTime(start.getTime() + 3600 * 1000 * 24 * 14);
+        //     picker.$emit('pick', [start, end]);
+        //   }
+        // }]
+      },
+      dateRange: []
+    };
+  },
+  methods: {
+    borrowBook () {
+      const userBorrowsRef = database.ref(`borrows/${this.bookKey}`);
+      debugger;
+      userBorrowsRef.child(firebase.auth().currentUser.uid).update(this.dateRange)
     }
-  });
+  },
+  watch: {
+    dateRange (range) {
+      this.rangeTooHigh = false;
+      const millisecondsInADay = 8.64e7;
+      if (Math.round(Math.abs((+range[0]) - (+range[1]))/millisecondsInADay) > 14) {
+        this.rangeTooHigh = true;
+      }
+    }
+  }
+});
 </script>
 
 <style lang="css">

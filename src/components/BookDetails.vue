@@ -2,7 +2,7 @@
   <el-dialog :title="currentBook.title" v-model="dialogVisible" size="tiny">
   <span>{{currentBook.description }}</span>
   <img :src="currentBook.image.thumbnail" class="image">
-  <calendar></calendar>
+  <calendar :bookKey="currentBook['.key']"></calendar>
   <span slot="footer" class="dialog-footer">
     <el-button type="primary" @click="dialogVisible = false">Done</el-button>
   </span>
