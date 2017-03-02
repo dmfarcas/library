@@ -4,6 +4,8 @@
     <el-menu-item index="dashboard">Dashboard</el-menu-item>
     <el-menu-item index="admin">Admin</el-menu-item>
     <el-menu-item index="resources">Resources</el-menu-item>
+    <el-menu-item index="nas">NAS</el-menu-item>
+    <el-menu-item index="" v-on:click='onClickMeal'>Meal</el-menu-item>
     <el-submenu class="toggle-login" v-bind:class="{ hidden: !isLoggedIn }" index="2">
       <template slot="title">{{ displayName }}</template>
       <el-menu-item index="2-2" v-on:click="logout">Logout</el-menu-item>
@@ -31,7 +33,11 @@
         console.log(key, keyPath);
       },
       logout: logout,
-      firebase: firebase
+      firebase: firebase,
+      onClickMeal() {
+          var win = window.open('http://lunch.assist.ro', '_blank');
+          win.focus();
+      }
     },
     mounted() {
       firebase.auth().onAuthStateChanged((user) => {

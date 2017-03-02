@@ -7,7 +7,16 @@
       <div class="product-list-container clearfix">
         <article class="product-list-item clearfix" v-for="book in books">
           <a @click="details(book['.key'])" class="product-list-item-image-container cursor-hover">
-            <img class="product-list-item-image" :src="book.image.thumbnail" alt="alternative-image">
+
+            <div v-if="Math.random() > 0.5">
+              <el-badge value="borrowed" class="item">
+                <img class="product-list-item-image" :src="book.image.thumbnail" alt="alternative-image">
+              </el-badge>
+            </div>
+            <div v-else>
+              <img class="product-list-item-image" :src="book.image.thumbnail" alt="alternative-image">
+            </div>
+
           </a>
           <div class="product-list-item-price">
             <div class="price-container">
