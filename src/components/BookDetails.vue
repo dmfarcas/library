@@ -1,11 +1,13 @@
 <template lang="html">
-  <el-dialog :title="currentBook.title" v-model="dialogVisible">
+  <el-dialog :title="currentBook.title" v-model="dialogVisible" size="small">
     <el-row :gutter="20">
       <el-col :span="8" class="details-left">
         <img :src="currentBook.image.thumbnail" class="image text-center">
         <ul>
-          <li>Author: auth</li>
-          <li><strong>Editura</strong>: {{currentBook.publisher}}</li>
+          <!-- <li>Author: {{currentBook.authors.length > 1 ? currentBook.authors.join(", ")  : currentBook.authors[0]}}</li> -->
+          <li v-show="currentBook.publisher">Editura: {{currentBook.publisher}}</li>
+          <li v-show="currentBook.categories">Categorii: {{ currentBook.categories.length > 1 ? currentBook.categories.join(", ")  : currentBook.categories[0] }}</li>
+
           <li>Pagini: {{currentBook.pageCount}}</li>
         </ul>
       </el-col>
@@ -14,7 +16,7 @@
       </el-col>
     </el-row>
 
-    <calendar :bookKey="currentBook['.key']"></calendar>
+    <borrow :bookKey="currentBook['.key']"></borrow>
     <span slot="footer" class="dialog-footer">
       <el-button type="primary" @click="dialogVisible = false">Done</el-button>
     </span>
@@ -25,7 +27,7 @@
   import Vue from 'vue';
   import eventHub from '../EventHub';
   import { database } from '../firebaseInstance'
-  import Calendar from './Calendar'
+  import Borrow from './Borrow'
 
   const booksRef = database.ref('books');
 
@@ -35,6 +37,8 @@
         currentBook: {
           title: "",
           description: "",
+          categories: "",
+          publisher: "",
           image: {
             thumbnail: ""
           }
@@ -44,6 +48,7 @@
     },
     methods: {
       details (currentBook) {
+        console.log(currentBook);
         this.currentBook = currentBook;
         this.dialogVisible = true;
         // eventHub.$emit('open-modal', this.details) //lol
@@ -52,7 +57,7 @@
     created() {
       eventHub.$on('open-modal', this.details)
     },
-    components: { Calendar }
+    components: { Borrow }
   });
 </script>
 

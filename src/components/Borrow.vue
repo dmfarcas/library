@@ -34,17 +34,20 @@ export default Vue.extend({
   },
   data() {
     return {
-      rangeTooHigh: false,
-      dateRange: [],
-      dirtyHack: [],
       buttonContent: "Borrow",
       currentlyAt: "There is currently no one in possesion of the book."
     };
   },
   methods: {
     borrowBook () {
-      const userBorrowsRef = database.ref(`borrows/`);
-      userBorrowsRef.child(this.bookKey).update({currentlyAt: firebase.auth().currentUser.uid});
+      // if (this.buttonContent === "Borrow") {
+      //   this.buttonContent = "I really borrowed this book."
+      // } else {
+        const userBorrowsRef = database.ref(`borrows/`);
+        userBorrowsRef.child(this.bookKey).update({currentlyAt: firebase.auth().currentUser.uid, date: new Date()});
+        this.buttonContent = "Borrowed"
+      // }
+
 
     },
     bookIsAt() {
@@ -53,7 +56,7 @@ export default Vue.extend({
 
 
     const displayName = vm.users.filter(e => e['uid'] === getCurrentlyAtId)[0].displayName;
-    
+
     vm.currentlyAt = `This book is currently at ${displayName}`;
     }
   },

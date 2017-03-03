@@ -2,7 +2,7 @@
   <div id="app">
     <navigation></navigation>
     <router-view></router-view>
-    <!--<page-footer></page-footer>-->
+    <page-footer></page-footer>
   </div>
 </template>
 
