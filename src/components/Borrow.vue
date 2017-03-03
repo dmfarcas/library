@@ -1,15 +1,5 @@
 <template lang="html">
-  <div class="block text-center mt15">
-    <!--<el-date-picker
-      v-model="dateRange"
-      format="dd.MM.yyyy"
-      type="daterange"
-      align="right"
-      placeholder="Pick a range"
-      :picker-options="pickerOptions">
-    </el-date-picker>-->
-
-    {{currentlyAt}}
+    {{currentlyAt}}`
 <el-tooltip content="Are you sure? Click this button once you are in possesion of the book." placement="top">
       <el-button @click="borrowBook()" type="primary">{{buttonContent}}</el-button>
     </el-tooltip>

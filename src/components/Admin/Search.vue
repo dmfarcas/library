@@ -18,6 +18,7 @@
   .el-autocomplete {
     width: 100%;
   }
+
   .container-search {
     margin-top: 9px;
   }
@@ -48,6 +49,26 @@
     padding-bottom: 10px;
     height: 100px;
     display: inline;
+  }
+</style>
+
+<style>
+  .el-autocomplete-suggestion li {
+    margin: 4px 0;
+  }
+
+  .el-autocomplete-suggestion li img {
+    max-width: 80px;
+    max-height: 250px;
+    display: inline;
+    float: left;
+    margin-right: 20px;
+  }
+
+  .authors {
+    font-size: 10px;
+    position: relative;
+    bottom: 20px;
   }
 </style>
 
