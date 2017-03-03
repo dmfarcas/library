@@ -306,4 +306,20 @@
   .social-icons .social-library {
     background-position: -150px -250px;
   }
+
+  .el-menu--dark {
+    display: table;
+    width: 100%;
+  }
+
+  html{
+    min-height:100%;/* make sure it is at least as tall as the viewport */
+    position:relative;
+  }
+
+    @media screen and (max-width: 1024px) {
+    .product-list-item {
+        width: 100%;
+    }
+  }
 </style>

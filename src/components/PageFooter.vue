@@ -26,6 +26,7 @@
     margin-top: -120px;
     position: absolute;
     bottom: 0;
+    background-color: #324057;
   }
 
   .footer * {
@@ -33,7 +34,7 @@
   }
 
   .footer .container {
-    height: 100%;
+    width: 100%;
     box-sizing: border-box
   }
 

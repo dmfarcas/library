@@ -18,7 +18,6 @@
 
 <style>
   body {
-    position: relative;
     margin: 0px;
     height: 100%;
   }
