@@ -57,6 +57,12 @@
     margin: 4px 0;
   }
 
+  .el-autocomplete {
+    width: 70% !important;
+    display: block !important;
+    margin: 10px auto !important;
+  }
+
   .el-autocomplete-suggestion li img {
     max-width: 80px;
     max-height: 250px;
