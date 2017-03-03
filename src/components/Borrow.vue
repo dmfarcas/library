@@ -1,8 +1,11 @@
 <template lang="html">
-    {{currentlyAt}}`
-<el-tooltip content="Are you sure? Click this button once you are in possesion of the book." placement="top">
-      <el-button @click="borrowBook()" type="primary">{{buttonContent}}</el-button>
+  <div>
+    <el-tooltip content="Are you sure? Click this button once you are in possesion of the book." placement="top">
+      <el-button @click="borrowBook()" type="primary" :disabled="isItDisabled">{{buttonContent}}</el-button>
     </el-tooltip>
+    {{bookIsAt()}}
+  </div>
+
 </template>
 
 <script>
@@ -25,37 +28,47 @@ export default Vue.extend({
   data() {
     return {
       buttonContent: "Borrow",
-      currentlyAt: "There is currently no one in possesion of the book."
+      currentlyAt: "There is currently no one in possesion of the book.",
+      isItDisabled: false
     };
   },
   methods: {
     borrowBook () {
-      // if (this.buttonContent === "Borrow") {
-      //   this.buttonContent = "I really borrowed this book."
-      // } else {
+
         const userBorrowsRef = database.ref(`borrows/`);
         userBorrowsRef.child(this.bookKey).update({currentlyAt: firebase.auth().currentUser.uid, date: new Date()});
         this.buttonContent = "Borrowed"
-      // }
-
-
+        this.isItDisabled = true;
     },
     bookIsAt() {
-         if (!vm.borrows.length || !vm.borrows) return;
-    const getCurrentlyAtId = vm.borrows.filter(e => e['.key'] === vm.bookKey)[0].currentlyAt;
+      var vm = this;
+      console.log(vm.bookKey);
+      console.log(this.bookKey);
+      const book = vm.borrows.filter(e => e['.key'] === vm.bookKey)[0];
 
+      if (!book) {
+        this.buttonContent = "Borrow"
+        this.isItDisabled = false;
+        return "There is currently no one in possesion of the book.";
+      }
 
-    const displayName = vm.users.filter(e => e['uid'] === getCurrentlyAtId)[0].displayName;
+      const date = vm.borrows.filter(e => e['.key'] === vm.bookKey)[0].date;
+      const since = moment(date).fromNow();
+      const getCurrentlyAtId = book.currentlyAt;
+      const atThisId = vm.users.filter(e => e['uid'] === getCurrentlyAtId)[0];
+      const displayName = atThisId.displayName;
 
-    vm.currentlyAt = `This book is currently at ${displayName}`;
+      if(firebase.auth().currentUser.uid === atThisId.uid) {
+        this.buttonContent = "Borrowed"
+        this.isItDisabled = true;
+        return "You currently have this book."
+      }
+
+      this.buttonContent = "Borrow"
+      this.isItDisabled = false;
+      return `This book is currently at ${displayName}. It has been here since ${since}`;
+
     }
-  },
-  mounted() {
-    var vm = this;
-    console.log(vm.bookKey);
-
-    // eventHub.$on('open-modal', this.bookIsAt)
-
   }
 });
 </script>

@@ -44,10 +44,7 @@
         if (user) {
           this.displayName = user.displayName;
           this.isLoggedIn = user;
-        } else {
-          // this.displayName = user.displayName;
         }
-
       });
     }
   });

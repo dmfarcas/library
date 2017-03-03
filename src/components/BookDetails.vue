@@ -4,7 +4,7 @@
       <el-col :span="8" class="details-left">
         <img :src="currentBook.image.thumbnail" class="image text-center">
         <ul>
-          <!-- <li>Author: {{currentBook.authors.length > 1 ? currentBook.authors.join(", ")  : currentBook.authors[0]}}</li> -->
+          <li>Author: {{currentBook.authors.length > 1 ? currentBook.authors.join(", ")  : currentBook.authors[0]}}</li>
           <li v-show="currentBook.publisher">Editura: {{currentBook.publisher}}</li>
           <li v-show="currentBook.categories">Categorii: {{ currentBook.categories.length > 1 ? currentBook.categories.join(", ")  : currentBook.categories[0] }}</li>
 
@@ -35,6 +35,7 @@
     data() {
       return {
         currentBook: {
+          authors: [],
           title: "",
           description: "",
           categories: "",
@@ -51,7 +52,6 @@
         console.log(currentBook);
         this.currentBook = currentBook;
         this.dialogVisible = true;
-        // eventHub.$emit('open-modal', this.details) //lol
       }
     },
     created() {
