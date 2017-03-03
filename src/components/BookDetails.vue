@@ -46,7 +46,7 @@
       details (currentBook) {
         this.currentBook = currentBook;
         this.dialogVisible = true;
-
+        // eventHub.$emit('open-modal', this.details) //lol
       }
     },
     created() {
