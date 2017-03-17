@@ -88,12 +88,7 @@
           info: 'https://red.assist.ro/projects/assist/wiki/Tutoriale'
         }]
       }
-    },
-    methods: {
-      handleClick(e) {
-        console.log('click', e);
-      }
-    },
+    }
   });
 
 </script>

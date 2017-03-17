@@ -11,14 +11,14 @@ import store from './vuex/store'
 import firebase from 'firebase'
 import lang from 'element-ui/lib/locale/lang/en'
 import locale from 'element-ui/lib/locale'
-
-locale.use(lang)
-
-
-Vue.use(VuexFire)
-Vue.use(ElementUI)
-
 import { init } from './auth';
+
+locale.use(lang);
+
+
+Vue.use(VuexFire);
+Vue.use(ElementUI);
+
 
 init();
 

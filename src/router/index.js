@@ -24,12 +24,12 @@ const router = new Router({
     {
       path: '/admin',
       name: 'Admin',
-      meta: { //TODO this should require auth AND the admin role ICHIM
+      meta: {
         requiresAuth: true,
       },
       component: Admin,
     },
-     {
+    {
       path: '/dashboard',
       name: 'Dashboard',
       meta: {

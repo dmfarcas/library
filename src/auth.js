@@ -46,8 +46,6 @@ const init = function init() {
 
 
     } else {
-      // User is signed out.
-      // console.log('signed out');
       user.displayName = '';
       user.email = '';
       user.emailVerified = false;

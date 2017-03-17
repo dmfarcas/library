@@ -4,16 +4,7 @@
       <div class="product-list-container clearfix">
         <article class="product-list-item clearfix" v-for="book in books">
           <a @click="details(book['.key'])" class="product-list-item-image-container cursor-hover">
-
-            <div v-if="true === false">
-              <el-badge value="borrowed" class="item">
-                <img class="product-list-item-image" :src="book.image.thumbnail" alt="alternative-image">
-              </el-badge>
-            </div>
-            <div v-else>
               <img class="product-list-item-image" :src="book.image.thumbnail" alt="alternative-image">
-            </div>
-
           </a>
           <div class="product-list-item-price">
             <div class="price-container">
@@ -35,7 +26,6 @@
             <div class="product-list-item-share">
               <div>
                 <el-button plain type="text" class="button" @click="details(book)">Details</el-button>
-                <el-button plain type="text" class="button" :href="book.preview" target="_blank">Preview</el-button>
                 <el-button plain type="text" class="button" @click="removeBook(book['.key'])">Delete</el-button>
               </div>
             </div>
@@ -74,16 +64,13 @@
       details(book) {
         eventHub.$emit('open-modal', book)
       },
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      },
       removeBook(key) {
         booksRef.child(key).remove();
-          this.$notify({
-            title: 'Deleted',
-            message: 'Successfuly deleted book!',
-            type: 'success'
-          });
+        this.$notify({
+          title: 'Deleted',
+          message: 'Successfuly deleted book!',
+          type: 'success'
+        });
         this.dialogVisible = false;
       }
     },

@@ -17,17 +17,10 @@
 </template>
 
 <script>
-  import firebase from 'firebase';
-  import { database } from '../../firebaseInstance';
   import Books from '../Books'
   import Search from './Search';
-  import Vuex from 'vuex';
 
   export default {
     components: { Books, Search }
   };
 </script>
-
-<style>
-
-</style>

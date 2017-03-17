@@ -50,9 +50,6 @@
     height: 100px;
     display: inline;
   }
-</style>
-
-<style>
   .el-autocomplete-suggestion li {
     margin: 4px 0;
   }
@@ -100,15 +97,17 @@
     }
   });
 
+
+  const apiKey = "AIzaSyBPhoh6CYEtQ2SQhhU5XzK-OwB9WIfteCE";
   function querySearchAsync (queryString, cb) {
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${queryString}&key=AIzaSyBPhoh6CYEtQ2SQhhU5XzK-OwB9WIfteCE`)
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${queryString}&key=${apiKey}`)
       .then(response => {
         return response.json()
       })
       .then(json => {
         cb(json.items.map(e => {
           return {
-            value: e.volumeInfo.title, //TODO how to send title directly in the callback.
+            value: e.volumeInfo.title,
             title: e.volumeInfo.title || '',
             subtitle: e.volumeInfo.subtitle || '',
             description: e.volumeInfo.description || '',
@@ -129,9 +128,6 @@
   export default Vue.extend({
     name: 'Search',
     props: ['Search'],
-    ready () {
-      var self = this;
-    },
     data () {
       return {
         textfieldBook: '',
@@ -148,6 +144,11 @@
         if (this.selectedItem) {
           booksRef.push(this.selectedItem);
         }
+        this.$notify({
+          title: 'Added',
+          message: 'Successfuly added book!',
+          type: 'success'
+        });
       },
       querySearchAsync,
       createFilter (queryString) {
